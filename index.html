@@ -4,478 +4,128 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Mẫu 01 - Học liệu 3D Vẽ kỹ thuật</title>
-
-<script type="module"
-  src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js">
-</script>
+<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
 
 <style>
 *{box-sizing:border-box}
 :root{
-  --blue:#0b6aa9;
-  --blue2:#0d4f7d;
-  --light:#eaf4fb;
-  --line:#dbe4ea;
-  --text:#183042;
-  --muted:#607586;
-  --bg:#f3f6f9;
-  --white:#fff;
+  --blue:#0b6aa9;--blue2:#0d4f7d;--light:#eaf4fb;--line:#dbe4ea;
+  --text:#183042;--muted:#607586;--bg:#f3f6f9;
 }
-body{
-  margin:0;
-  font-family:Arial,Helvetica,sans-serif;
-  background:var(--bg);
-  color:var(--text);
-}
-.page{
-  width:min(1380px,98vw);
-  margin:8px auto 18px;
-}
-
-/* HEADER GỌN */
-.hero{
-  background:linear-gradient(135deg,var(--blue2),var(--blue));
-  color:#fff;
-  border-radius:14px;
-  padding:9px 14px;
-  margin-bottom:8px;
-}
-.hero h1{
-  margin:0;
-  text-align:center;
-  font-size:clamp(20px,2.25vw,30px);
-  line-height:1.1;
-}
-.hero p{
-  margin:4px 0 0;
-  text-align:center;
-  font-size:13px;
-}
-
-.tabs{
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  gap:6px;
-  margin-bottom:8px;
-}
-.tabs button{
-  border:0;
-  border-radius:9px;
-  min-height:38px;
-  padding:7px 6px;
-  background:var(--blue);
-  color:#fff;
-  font-size:13px;
-  font-weight:700;
-  cursor:pointer;
-}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text)}
+.page{width:min(1380px,98vw);margin:8px auto 18px}
+.hero{background:linear-gradient(135deg,var(--blue2),var(--blue));color:#fff;border-radius:14px;padding:9px 14px;margin-bottom:8px}
+.hero h1{margin:0;text-align:center;font-size:clamp(20px,2.25vw,30px);line-height:1.1}
+.hero p{margin:4px 0 0;text-align:center;font-size:13px}
+.tabs{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-bottom:8px}
+.tabs button{border:0;border-radius:9px;min-height:38px;padding:7px 6px;background:var(--blue);color:#fff;font-size:13px;font-weight:700;cursor:pointer}
 .tabs button.active{background:var(--blue2)}
 
-.workspace{
-  display:grid;
-  grid-template-columns:220px minmax(0,1fr) 330px;
-  gap:8px;
-  height:calc(100vh - 170px);
-  min-height:480px;
-  max-height:720px;
-}
-.panel{
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:12px;
-  overflow:hidden;
-  box-shadow:0 2px 10px rgba(0,0,0,.04);
-}
-.panel-title{
-  background:var(--light);
-  text-align:center;
-  padding:8px 7px;
-  font-weight:700;
-  font-size:14px;
-}
+.workspace{display:grid;grid-template-columns:220px minmax(0,1fr) 360px;gap:8px;height:calc(100vh - 170px);min-height:480px;max-height:720px}
+.panel{background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.04)}
+.panel-title{background:var(--light);text-align:center;padding:8px 7px;font-weight:700;font-size:14px}
 
-/* THAM CHIẾU */
-.reference{
-  display:flex;
-  flex-direction:column;
-}
-.reference img{
-  width:100%;
-  height:100%;
-  min-height:0;
-  object-fit:contain;
-  padding:7px;
-}
+/* reference */
+.reference{display:flex;flex-direction:column}
+.reference img{width:100%;height:100%;min-height:0;object-fit:contain;padding:7px}
 
 /* 3D */
-.model-panel{
-  display:flex;
-  flex-direction:column;
-}
-.model-wrap{
-  position:relative;
-  flex:1;
-  min-height:0;
-}
-model-viewer{
-  width:100%;
-  height:100%;
-  min-height:0;
-  background:linear-gradient(#eef4f8,#fbfcfd);
-}
-.badge{
-  position:absolute;
-  right:8px;
-  top:8px;
-  z-index:3;
-  background:rgba(13,79,125,.92);
-  color:#fff;
-  border-radius:999px;
-  padding:6px 9px;
-  font-size:11px;
-  font-weight:700;
-  text-align:center;
-}
-.hint{
-  text-align:center;
-  padding:6px 8px 7px;
-  color:var(--muted);
-  font-size:11px;
-  border-top:1px solid #edf1f4;
-}
+.model-panel{display:flex;flex-direction:column}
+.model-wrap{position:relative;flex:1;min-height:0}
+model-viewer{width:100%;height:100%;min-height:0;background:linear-gradient(#eef4f8,#fbfcfd)}
+.badge{position:absolute;right:8px;top:8px;z-index:3;background:rgba(13,79,125,.92);color:#fff;border-radius:999px;padding:6px 9px;font-size:11px;font-weight:700}
+.hint{text-align:center;padding:6px 8px 7px;color:var(--muted);font-size:11px;border-top:1px solid #edf1f4}
 
-/* HÌNH CHIẾU PC */
-.projection-panel{
-  display:flex;
-  flex-direction:column;
-}
-.projection-body{
-  flex:1;
-  min-height:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:8px;
-}
-.projection-body img{
-  max-width:100%;
-  max-height:100%;
-  object-fit:contain;
-}
-.projection-empty{
-  text-align:center;
-  color:var(--muted);
-  line-height:1.35;
-  font-size:13px;
-  padding:16px;
-}
-.projection-note{
-  padding:7px 8px;
-  border-top:1px solid var(--line);
-  text-align:center;
-  color:var(--muted);
-  font-size:10.5px;
-  background:#fbfcfd;
-}
+/* right panel */
+.projection-panel{display:flex;flex-direction:column}
+.projection-stage{flex:1;min-height:0;position:relative;padding:8px}
+.single-view,.empty-view,.all-views{width:100%;height:100%}
+.empty-view{display:flex;align-items:center;justify-content:center;text-align:center;color:var(--muted);font-size:13px;padding:16px}
+.single-view{display:none;align-items:center;justify-content:center}
+.single-view img{max-width:100%;max-height:100%;object-fit:contain}
 
-/* TỔNG HỢP 3 HÌNH CHIẾU - BỐ TRÍ ĐÚNG YÊU CẦU
-   Đứng: trên trái
-   Bằng: dưới hình đứng
-   Cạnh: bên phải hình đứng
-*/
-.all-layout{
+/* IMPORTANT: the all views area is its own grid, not dependent on class toggles */
+.all-views{
   display:none;
-  width:100%;
-  height:100%;
   grid-template-columns:1fr 1fr;
   grid-template-rows:1fr 1fr;
   gap:7px;
-  padding:4px;
 }
-.all-layout.show{display:grid}
-.all-view{
-  border:1px solid #dfe8ee;
-  border-radius:8px;
-  background:#fff;
-  display:flex;
-  flex-direction:column;
-  min-width:0;
-  min-height:0;
-  overflow:hidden;
+.ov{
+  border:1px solid #dfe8ee;border-radius:8px;background:#fff;overflow:hidden;
+  display:flex;flex-direction:column;min-width:0;min-height:0;
 }
-.all-view .all-label{
-  background:#f1f7fb;
-  text-align:center;
-  font-size:11px;
-  font-weight:700;
-  padding:5px 4px;
+.ov-title{background:#f1f7fb;text-align:center;font-size:11px;font-weight:700;padding:5px}
+.ov-img{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;padding:4px}
+.ov img{max-width:100%;max-height:100%;object-fit:contain}
+.ov-front{grid-column:1;grid-row:1}
+.ov-top{grid-column:1;grid-row:2}
+.ov-side{grid-column:2;grid-row:1}
+.ov-empty{
+  grid-column:2;grid-row:2;border:1px dashed #d9e4eb;border-radius:8px;
+  display:flex;align-items:center;justify-content:center;color:#95a4af;font-size:10.5px;text-align:center;padding:6px;
 }
-.all-view .all-img{
-  flex:1;
-  min-height:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:4px;
-}
-.all-view img{
-  max-width:100%;
-  max-height:100%;
-  object-fit:contain;
-}
-.all-front{grid-column:1;grid-row:1}
-.all-top{grid-column:1;grid-row:2}
-.all-side{grid-column:2;grid-row:1}
-.all-blank{
-  grid-column:2;
-  grid-row:2;
-  border:1px dashed #d9e4eb;
-  border-radius:8px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:#95a4af;
-  font-size:11px;
-  text-align:center;
-  padding:8px;
-}
+.projection-note{padding:7px 8px;border-top:1px solid var(--line);text-align:center;color:var(--muted);font-size:10.5px;background:#fbfcfd}
 
-/* PHỤ */
-.subtools{
-  display:flex;
-  gap:6px;
-  justify-content:center;
-  flex-wrap:wrap;
-  margin-top:7px;
-}
-.subtools button{
-  border:1px solid #aac7d9;
-  background:#fff;
-  color:var(--blue2);
-  border-radius:8px;
-  min-height:34px;
-  padding:6px 11px;
-  font-weight:700;
-  font-size:12px;
-  cursor:pointer;
-}
+.subtools{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-top:7px}
+.subtools button{border:1px solid #aac7d9;background:#fff;color:var(--blue2);border-radius:8px;min-height:34px;padding:6px 11px;font-weight:700;font-size:12px;cursor:pointer}
 
-/* MOBILE */
-.mobile-compare{display:none}
-.mobile-all{display:none}
+/* mobile */
+.mobile-compare,.mobile-all{display:none}
 .mobile-ref-btn{display:none}
 
 @media(max-width:900px){
-  .page{
-    width:100%;
-    margin:0 auto 20px;
-    padding:7px;
-  }
-  .hero{
-    border-radius:12px;
-    padding:10px 8px;
-    margin-bottom:8px;
-  }
-  .hero h1{
-    font-size:20px;
-    line-height:1.15;
-  }
-  .hero p{
-    font-size:12.5px;
-    line-height:1.3;
-  }
+  .page{width:100%;margin:0 auto 20px;padding:7px}
+  .hero{border-radius:12px;padding:10px 8px;margin-bottom:8px}
+  .hero h1{font-size:20px;line-height:1.15}
+  .hero p{font-size:12.5px;line-height:1.3}
+  .tabs{grid-template-columns:1fr 1fr;gap:6px}
+  .tabs button{min-height:48px;font-size:13px}
+  .tabs button:last-child{grid-column:1/-1}
 
-  .tabs{
-    grid-template-columns:1fr 1fr;
-    gap:6px;
-  }
-  .tabs button{
-    min-height:48px;
-    font-size:13px;
-  }
-  .tabs button:last-child{
-    grid-column:1/-1;
-  }
-
-  .workspace{
-    display:block;
-    height:auto;
-    min-height:0;
-    max-height:none;
-  }
-  .reference,
-  .projection-panel{
-    display:none;
-  }
-
-  .model-panel{
-    border-radius:12px;
-  }
-  .model-wrap{
-    height:35vh;
-    min-height:275px;
-  }
-  model-viewer{
-    height:100%;
-  }
+  .workspace{display:block;height:auto;min-height:0;max-height:none}
+  .reference,.projection-panel{display:none}
+  .model-panel{border-radius:12px}
+  .model-wrap{height:35vh;min-height:275px}
+  model-viewer{height:100%}
   .mobile-ref-btn{
-    display:block;
-    position:absolute;
-    left:8px;
-    top:8px;
-    z-index:4;
-    border:0;
-    background:rgba(255,255,255,.96);
-    color:var(--blue2);
-    border-radius:999px;
-    padding:6px 9px;
-    font-size:11px;
-    font-weight:700;
-    box-shadow:0 2px 8px rgba(0,0,0,.1);
-    cursor:pointer;
+    display:block;position:absolute;left:8px;top:8px;z-index:4;border:0;
+    background:rgba(255,255,255,.96);color:var(--blue2);border-radius:999px;
+    padding:6px 9px;font-size:11px;font-weight:700;box-shadow:0 2px 8px rgba(0,0,0,.1)
   }
-  .badge{
-    right:8px;
-    top:8px;
-    font-size:10.5px;
-    max-width:52%;
-  }
-  .hint{
-    font-size:11px;
-    padding:6px 8px;
-  }
+  .badge{right:8px;top:8px;font-size:10.5px;max-width:52%}
+  .hint{font-size:11px;padding:6px 8px}
 
-  /* Mobile: tham chiếu + 1 hình chiếu */
-  .mobile-compare{
-    display:none;
-    grid-template-columns:1fr 1fr;
-    gap:6px;
-    margin-top:7px;
-  }
-  .mobile-compare.show{display:grid}
-  .mobile-card{
-    background:#fff;
-    border:1px solid var(--line);
-    border-radius:11px;
-    overflow:hidden;
-  }
-  .mobile-card-title{
-    background:var(--light);
-    text-align:center;
-    padding:7px 5px;
-    font-size:12px;
-    font-weight:700;
-    line-height:1.2;
-  }
-  .mobile-card-body{
-    height:22vh;
-    min-height:165px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:5px;
-  }
-  .mobile-card img{
-    max-width:100%;
-    max-height:100%;
-    object-fit:contain;
-  }
-  .mobile-note{
-    grid-column:1/-1;
-    background:#fff;
-    border:1px solid var(--line);
-    border-radius:10px;
-    padding:7px 9px;
-    text-align:center;
-    color:var(--muted);
-    font-size:11px;
-  }
+  .mobile-compare{grid-template-columns:1fr 1fr;gap:6px;margin-top:7px}
+  .mobile-card{background:#fff;border:1px solid var(--line);border-radius:11px;overflow:hidden}
+  .mobile-card-title{background:var(--light);text-align:center;padding:7px 5px;font-size:12px;font-weight:700}
+  .mobile-card-body{height:22vh;min-height:165px;display:flex;align-items:center;justify-content:center;padding:5px}
+  .mobile-card img{max-width:100%;max-height:100%;object-fit:contain}
+  .mobile-note{grid-column:1/-1;background:#fff;border:1px solid var(--line);border-radius:10px;padding:7px 9px;text-align:center;color:var(--muted);font-size:11px}
 
-  /* Mobile: tổng hợp 3 hình chiếu theo đúng bố trí */
   .mobile-all{
-    display:none;
-    margin-top:7px;
-    background:#fff;
-    border:1px solid var(--line);
-    border-radius:11px;
-    overflow:hidden;
+    margin-top:7px;background:#fff;border:1px solid var(--line);border-radius:11px;overflow:hidden
   }
-  .mobile-all.show{display:block}
-  .mobile-all-title{
-    background:var(--light);
-    text-align:center;
-    padding:8px;
-    font-size:13px;
-    font-weight:700;
-  }
+  .mobile-all-title{background:var(--light);text-align:center;padding:8px;font-size:13px;font-weight:700}
   .mobile-all-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    grid-template-rows:1fr 1fr;
-    gap:6px;
-    padding:7px;
-    height:48vh;
-    min-height:360px;
+    display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;
+    gap:6px;padding:7px;height:48vh;min-height:360px
   }
-  .mobile-all-view{
-    border:1px solid #dfe8ee;
-    border-radius:8px;
-    display:flex;
-    flex-direction:column;
-    overflow:hidden;
-    min-height:0;
-  }
-  .mobile-all-view b{
-    display:block;
-    text-align:center;
-    background:#f1f7fb;
-    padding:5px;
-    font-size:11px;
-  }
-  .mobile-all-view div{
-    flex:1;
-    min-height:0;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:4px;
-  }
-  .mobile-all-view img{
-    max-width:100%;
-    max-height:100%;
-    object-fit:contain;
-  }
-  .mobile-all-front{grid-column:1;grid-row:1}
-  .mobile-all-top{grid-column:1;grid-row:2}
-  .mobile-all-side{grid-column:2;grid-row:1}
-  .mobile-all-blank{
-    grid-column:2;
-    grid-row:2;
-    border:1px dashed #d9e4eb;
-    border-radius:8px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:#95a4af;
-    text-align:center;
-    font-size:10px;
-    padding:6px;
+  .mov{border:1px solid #dfe8ee;border-radius:8px;overflow:hidden;display:flex;flex-direction:column}
+  .mov b{display:block;text-align:center;background:#f1f7fb;padding:5px;font-size:11px}
+  .mov div{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;padding:4px}
+  .mov img{max-width:100%;max-height:100%;object-fit:contain}
+  .mov-front{grid-column:1;grid-row:1}
+  .mov-top{grid-column:1;grid-row:2}
+  .mov-side{grid-column:2;grid-row:1}
+  .mov-empty{
+    grid-column:2;grid-row:2;border:1px dashed #d9e4eb;border-radius:8px;
+    display:flex;align-items:center;justify-content:center;color:#95a4af;text-align:center;font-size:10px;padding:6px
   }
 
-  .subtools{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:6px;
-    margin-top:7px;
-  }
-  .subtools button{
-    width:100%;
-    min-height:42px;
-    font-size:12px;
-  }
-  .subtools button:last-child{
-    grid-column:1/-1;
-  }
+  .subtools{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:7px}
+  .subtools button{width:100%;min-height:42px;font-size:12px}
+  .subtools button:last-child{grid-column:1/-1}
 }
 </style>
 </head>
@@ -483,143 +133,111 @@ model-viewer{
 <body>
 <div class="page">
 
-  <header class="hero">
-    <h1>MẪU 01 – MÔ HÌNH 3D VÀ HÌNH CHIẾU VUÔNG GÓC</h1>
-    <p>Quan sát 3D → chọn hướng nhìn → đối chiếu hình tham chiếu và hình chiếu ngay trên cùng màn hình</p>
-  </header>
+<header class="hero">
+  <h1>MẪU 01 – MÔ HÌNH 3D VÀ HÌNH CHIẾU VUÔNG GÓC</h1>
+  <p>Quan sát 3D → chọn hướng nhìn → đối chiếu hình tham chiếu và hình chiếu ngay trên cùng màn hình</p>
+</header>
 
-  <nav class="tabs">
-    <button id="btnFree" class="active" onclick="setMode('free')">1. Quan sát vật thể</button>
-    <button id="btnFront" onclick="setMode('front')">2. Hình chiếu đứng</button>
-    <button id="btnTop" onclick="setMode('top')">3. Hình chiếu bằng</button>
-    <button id="btnSide" onclick="setMode('side')">4. Hình chiếu cạnh</button>
-    <button id="btnAll" onclick="setMode('all')">5. Tổng hợp 3 hình chiếu</button>
-  </nav>
+<nav class="tabs">
+  <button id="btnFree" class="active" onclick="setMode('free')">1. Quan sát vật thể</button>
+  <button id="btnFront" onclick="setMode('front')">2. Hình chiếu đứng</button>
+  <button id="btnTop" onclick="setMode('top')">3. Hình chiếu bằng</button>
+  <button id="btnSide" onclick="setMode('side')">4. Hình chiếu cạnh</button>
+  <button id="btnAll" onclick="setMode('all')">5. Tổng hợp 3 hình chiếu</button>
+</nav>
 
-  <section class="workspace">
+<section class="workspace">
 
-    <!-- PC: tham chiếu -->
-    <aside class="panel reference">
-      <div class="panel-title">Hình vẽ kích thước (tham chiếu)</div>
-      <img src="hinh_tham_chieu.png" alt="Hình vẽ kích thước tham chiếu">
-    </aside>
+  <aside class="panel reference">
+    <div class="panel-title">Hình vẽ kích thước (tham chiếu)</div>
+    <img src="hinh_tham_chieu.png" alt="Hình tham chiếu">
+  </aside>
 
-    <!-- 3D -->
-    <section class="panel model-panel">
-      <div class="model-wrap">
-        <model-viewer
-          id="mv"
-          src="mau01.glb"
-          camera-controls
-          touch-action="pan-y"
-          shadow-intensity="1"
-          exposure="1"
-          camera-orbit="35deg 70deg auto"
-          alt="Mô hình 3D chi tiết kỹ thuật">
-        </model-viewer>
+  <section class="panel model-panel">
+    <div class="model-wrap">
+      <model-viewer id="mv" src="mau01.glb" camera-controls touch-action="pan-y"
+        shadow-intensity="1" exposure="1" camera-orbit="35deg 70deg auto"></model-viewer>
+      <button class="mobile-ref-btn" onclick="openReference()">Xem tham chiếu</button>
+      <div id="badge" class="badge">Quan sát tự do</div>
+    </div>
+    <div class="hint">Xoay bằng chuột/ngón tay • Cuộn/chụm để phóng to, thu nhỏ</div>
+  </section>
 
-        <button class="mobile-ref-btn" onclick="openReference()">Xem tham chiếu</button>
-        <div id="badge" class="badge">Quan sát tự do</div>
+  <aside class="panel projection-panel">
+    <div id="projectionTitle" class="panel-title">Kết quả hình chiếu</div>
+
+    <div class="projection-stage">
+      <div id="emptyView" class="empty-view">
+        Chọn <b>Hình chiếu đứng / bằng / cạnh</b> để đối chiếu ngay với mô hình 3D.
       </div>
-      <div class="hint">Xoay bằng chuột/ngón tay • Cuộn/chụm để phóng to, thu nhỏ</div>
-    </section>
 
-    <!-- PC: hình chiếu -->
-    <aside class="panel projection-panel">
-      <div id="projectionTitle" class="panel-title">Kết quả hình chiếu</div>
+      <div id="singleView" class="single-view">
+        <img id="singleImg" src="" alt="">
+      </div>
 
-      <div class="projection-body">
-        <div id="projectionEmpty" class="projection-empty">
-          Chọn <b>Hình chiếu đứng / bằng / cạnh</b> để đối chiếu ngay với mô hình 3D.
+      <div id="allViews" class="all-views">
+        <div class="ov ov-front">
+          <div class="ov-title">Hình chiếu đứng</div>
+          <div class="ov-img"><img src="hinh_chieu_dung.png" alt="Hình chiếu đứng"></div>
         </div>
 
-        <img id="projectionImg" src="" alt="" style="display:none">
+        <div class="ov ov-top">
+          <div class="ov-title">Hình chiếu bằng</div>
+          <div class="ov-img"><img src="hinh_chieu_bang.png" alt="Hình chiếu bằng"></div>
+        </div>
 
-        <div id="allLayout" class="all-layout">
-          <div class="all-view all-front">
-            <div class="all-label">Hình chiếu đứng</div>
-            <div class="all-img"><img src="hinh_chieu_dung.png" alt="Hình chiếu đứng"></div>
-          </div>
+        <div class="ov ov-side">
+          <div class="ov-title">Hình chiếu cạnh</div>
+          <div class="ov-img"><img src="hinh_chieu_canh.png" alt="Hình chiếu cạnh"></div>
+        </div>
 
-          <div class="all-view all-top">
-            <div class="all-label">Hình chiếu bằng</div>
-            <div class="all-img"><img src="hinh_chieu_bang.png" alt="Hình chiếu bằng"></div>
-          </div>
-
-          <div class="all-view all-side">
-            <div class="all-label">Hình chiếu cạnh</div>
-            <div class="all-img"><img src="hinh_chieu_canh.png" alt="Hình chiếu cạnh"></div>
-          </div>
-
-          <div class="all-blank">
-            Bố trí theo quan hệ giữa các hình chiếu
-          </div>
+        <div class="ov-empty">
+          Đứng: trên trái<br>
+          Bằng: phía dưới<br>
+          Cạnh: bên phải hình đứng
         </div>
       </div>
-
-      <div id="projectionNote" class="projection-note">
-        Hình chiếu được hiển thị song song với mô hình 3D.
-      </div>
-    </aside>
-
-  </section>
-
-  <!-- MOBILE: tham chiếu + 1 hình chiếu -->
-  <section id="mobileCompare" class="mobile-compare">
-    <div class="mobile-card">
-      <div class="mobile-card-title">Hình tham chiếu</div>
-      <div class="mobile-card-body">
-        <img src="hinh_tham_chieu.png" alt="Hình tham chiếu">
-      </div>
     </div>
 
-    <div class="mobile-card">
-      <div id="mobileProjectionTitle" class="mobile-card-title">Hình chiếu</div>
-      <div class="mobile-card-body">
-        <img id="mobileProjectionImg" src="" alt="">
-      </div>
+    <div id="projectionNote" class="projection-note">
+      Hình chiếu được hiển thị song song với mô hình 3D.
     </div>
+  </aside>
 
-    <div id="mobileNote" class="mobile-note">
-      Chọn một hình chiếu để đối chiếu.
-    </div>
-  </section>
+</section>
 
-  <!-- MOBILE: tổng hợp 3 hình chiếu -->
-  <section id="mobileAll" class="mobile-all">
-    <div class="mobile-all-title">Tổng hợp 3 hình chiếu</div>
-
-    <div class="mobile-all-grid">
-      <div class="mobile-all-view mobile-all-front">
-        <b>Hình chiếu đứng</b>
-        <div><img src="hinh_chieu_dung.png" alt="Hình chiếu đứng"></div>
-      </div>
-
-      <div class="mobile-all-view mobile-all-top">
-        <b>Hình chiếu bằng</b>
-        <div><img src="hinh_chieu_bang.png" alt="Hình chiếu bằng"></div>
-      </div>
-
-      <div class="mobile-all-view mobile-all-side">
-        <b>Hình chiếu cạnh</b>
-        <div><img src="hinh_chieu_canh.png" alt="Hình chiếu cạnh"></div>
-      </div>
-
-      <div class="mobile-all-blank">
-        Đứng ở trên trái<br>Bằng ở dưới<br>Cạnh ở bên phải
-      </div>
-    </div>
-  </section>
-
-  <div class="subtools">
-    <button onclick="openReference()">Xem lớn hình tham chiếu</button>
-    <button onclick="resetView()">Về góc nhìn ban đầu</button>
-    <button onclick="setMode('free')">Ẩn hình chiếu</button>
+<section id="mobileCompare" class="mobile-compare">
+  <div class="mobile-card">
+    <div class="mobile-card-title">Hình tham chiếu</div>
+    <div class="mobile-card-body"><img src="hinh_tham_chieu.png"></div>
   </div>
+
+  <div class="mobile-card">
+    <div id="mobileProjectionTitle" class="mobile-card-title">Hình chiếu</div>
+    <div class="mobile-card-body"><img id="mobileProjectionImg" src=""></div>
+  </div>
+
+  <div id="mobileNote" class="mobile-note">Chọn một hình chiếu để đối chiếu.</div>
+</section>
+
+<section id="mobileAll" class="mobile-all">
+  <div class="mobile-all-title">Tổng hợp 3 hình chiếu</div>
+  <div class="mobile-all-grid">
+    <div class="mov mov-front"><b>Hình chiếu đứng</b><div><img src="hinh_chieu_dung.png"></div></div>
+    <div class="mov mov-top"><b>Hình chiếu bằng</b><div><img src="hinh_chieu_bang.png"></div></div>
+    <div class="mov mov-side"><b>Hình chiếu cạnh</b><div><img src="hinh_chieu_canh.png"></div></div>
+    <div class="mov-empty">Đứng ở trên trái<br>Bằng ở dưới<br>Cạnh ở bên phải</div>
+  </div>
+</section>
+
+<div class="subtools">
+  <button onclick="openReference()">Xem lớn hình tham chiếu</button>
+  <button onclick="resetView()">Về góc nhìn ban đầu</button>
+  <button onclick="setMode('free')">Ẩn hình chiếu</button>
+</div>
 
 </div>
 
-<!-- Modal tham chiếu -->
 <div id="refModal" style="display:none;position:fixed;inset:0;z-index:99;background:rgba(0,0,0,.45);padding:16px;align-items:center;justify-content:center">
   <div style="width:min(92vw,520px);max-height:88vh;background:#fff;border-radius:16px;overflow:auto">
     <div style="display:flex;justify-content:space-between;align-items:center;background:#eaf4fb;padding:10px 12px;font-weight:700">
@@ -631,53 +249,39 @@ model-viewer{
 </div>
 
 <script>
-const mv = document.getElementById('mv');
-const badge = document.getElementById('badge');
+const mv=document.getElementById('mv');
+const badge=document.getElementById('badge');
 
-const pTitle = document.getElementById('projectionTitle');
-const pImg = document.getElementById('projectionImg');
-const pEmpty = document.getElementById('projectionEmpty');
-const pNote = document.getElementById('projectionNote');
-const allLayout = document.getElementById('allLayout');
+const projectionTitle=document.getElementById('projectionTitle');
+const projectionNote=document.getElementById('projectionNote');
+const emptyView=document.getElementById('emptyView');
+const singleView=document.getElementById('singleView');
+const singleImg=document.getElementById('singleImg');
+const allViews=document.getElementById('allViews');
 
-const mobileCompare = document.getElementById('mobileCompare');
-const mobileAll = document.getElementById('mobileAll');
-const mobileProjectionTitle = document.getElementById('mobileProjectionTitle');
-const mobileProjectionImg = document.getElementById('mobileProjectionImg');
-const mobileNote = document.getElementById('mobileNote');
+const mobileCompare=document.getElementById('mobileCompare');
+const mobileAll=document.getElementById('mobileAll');
+const mobileProjectionTitle=document.getElementById('mobileProjectionTitle');
+const mobileProjectionImg=document.getElementById('mobileProjectionImg');
+const mobileNote=document.getElementById('mobileNote');
 
-const btns = {
-  free: document.getElementById('btnFree'),
-  front: document.getElementById('btnFront'),
-  top: document.getElementById('btnTop'),
-  side: document.getElementById('btnSide'),
-  all: document.getElementById('btnAll')
+const btns={
+  free:document.getElementById('btnFree'),
+  front:document.getElementById('btnFront'),
+  top:document.getElementById('btnTop'),
+  side:document.getElementById('btnSide'),
+  all:document.getElementById('btnAll')
 };
 
-const views = {
-  front: {
-    title:'Hình chiếu đứng',
-    img:'hinh_chieu_dung.png',
-    orbit:'0deg 90deg auto',
-    note:'Đối chiếu hình tham chiếu, mô hình 3D và hình chiếu đứng.'
-  },
-  top: {
-    title:'Hình chiếu bằng',
-    img:'hinh_chieu_bang.png',
-    orbit:'0deg 0deg auto',
-    note:'Đối chiếu hình tham chiếu, mô hình 3D và hình chiếu bằng.'
-  },
-  side: {
-    title:'Hình chiếu cạnh',
-    img:'hinh_chieu_canh.png',
-    orbit:'90deg 90deg auto',
-    note:'Đối chiếu hình tham chiếu, mô hình 3D và hình chiếu cạnh.'
-  }
+const views={
+  front:{title:'Hình chiếu đứng',img:'hinh_chieu_dung.png',orbit:'0deg 90deg auto'},
+  top:{title:'Hình chiếu bằng',img:'hinh_chieu_bang.png',orbit:'0deg 0deg auto'},
+  side:{title:'Hình chiếu cạnh',img:'hinh_chieu_canh.png',orbit:'90deg 90deg auto'}
 };
 
-function activeBtn(name){
+function activate(name){
   Object.values(btns).forEach(b=>b.classList.remove('active'));
-  if(btns[name]) btns[name].classList.add('active');
+  btns[name].classList.add('active');
 }
 
 function camera(orbit){
@@ -685,47 +289,27 @@ function camera(orbit){
   if(mv.jumpCameraToGoal) mv.jumpCameraToGoal();
 }
 
-function clearPCProjection(){
-  pImg.style.display='none';
-  pEmpty.style.display='none';
-  allLayout.classList.remove('show');
-}
-
-function showProjection(name){
-  const v=views[name];
-
-  // PC
-  clearPCProjection();
-  pImg.style.display='block';
-  pImg.src=v.img;
-  pImg.alt=v.title;
-  pTitle.textContent=v.title;
-  pNote.textContent=v.note;
-
-  // Mobile
-  mobileAll.classList.remove('show');
-  mobileCompare.classList.add('show');
-  mobileProjectionTitle.textContent=v.title;
-  mobileProjectionImg.src=v.img;
-  mobileProjectionImg.alt=v.title;
-  mobileNote.textContent=v.note;
+/* Force display states explicitly */
+function hideRightViews(){
+  emptyView.style.display='none';
+  singleView.style.display='none';
+  allViews.style.display='none';
 }
 
 function setMode(mode){
-  activeBtn(mode);
+  activate(mode);
 
   if(mode==='free'){
     camera('35deg 70deg auto');
     badge.textContent='Quan sát tự do';
 
-    clearPCProjection();
-    pEmpty.style.display='block';
-    pTitle.textContent='Kết quả hình chiếu';
-    pEmpty.innerHTML='Chọn <b>Hình chiếu đứng / bằng / cạnh</b> để đối chiếu ngay với mô hình 3D.';
-    pNote.textContent='Hình chiếu được hiển thị song song với mô hình 3D.';
+    hideRightViews();
+    emptyView.style.display='flex';
+    projectionTitle.textContent='Kết quả hình chiếu';
+    projectionNote.textContent='Hình chiếu được hiển thị song song với mô hình 3D.';
 
-    mobileCompare.classList.remove('show');
-    mobileAll.classList.remove('show');
+    mobileCompare.style.display='none';
+    mobileAll.style.display='none';
     return;
   }
 
@@ -733,36 +317,45 @@ function setMode(mode){
     camera('35deg 70deg auto');
     badge.textContent='Tổng hợp 3 hình chiếu';
 
-    // PC: hiện đủ 3 hình theo bố trí chuẩn
-    clearPCProjection();
-    allLayout.classList.add('show');
-    pTitle.textContent='Tổng hợp 3 hình chiếu';
-    pNote.textContent='Đứng: trên trái • Bằng: phía dưới • Cạnh: bên phải hình chiếu đứng';
+    hideRightViews();
+    allViews.style.display='grid';  // explicit, no class toggle
+    projectionTitle.textContent='Tổng hợp 3 hình chiếu';
+    projectionNote.textContent='Đứng: trên trái • Bằng: phía dưới • Cạnh: bên phải hình đứng';
 
-    // Mobile: hiện đủ 3 hình theo cùng bố trí
-    mobileCompare.classList.remove('show');
-    mobileAll.classList.add('show');
+    mobileCompare.style.display='none';
+    mobileAll.style.display='block';
     return;
   }
 
-  camera(views[mode].orbit);
-  badge.textContent='Đối chiếu: '+views[mode].title.toLowerCase();
-  showProjection(mode);
+  const v=views[mode];
+  camera(v.orbit);
+  badge.textContent='Đối chiếu: '+v.title.toLowerCase();
+
+  hideRightViews();
+  singleImg.src=v.img;
+  singleImg.alt=v.title;
+  singleView.style.display='flex';
+  projectionTitle.textContent=v.title;
+  projectionNote.textContent='Đối chiếu trực tiếp '+v.title.toLowerCase()+' với mô hình 3D.';
+
+  mobileAll.style.display='none';
+  mobileCompare.style.display='grid';
+  mobileProjectionTitle.textContent=v.title;
+  mobileProjectionImg.src=v.img;
+  mobileProjectionImg.alt=v.title;
+  mobileNote.textContent='Hình tham chiếu và '+v.title.toLowerCase()+' được đặt cạnh nhau để đối chiếu.';
 }
 
 function resetView(){
   camera('35deg 70deg auto');
   badge.textContent='Góc nhìn ban đầu';
 }
-
 function openReference(){
   document.getElementById('refModal').style.display='flex';
 }
-
 function closeReference(){
   document.getElementById('refModal').style.display='none';
 }
 </script>
-
 </body>
 </html>
