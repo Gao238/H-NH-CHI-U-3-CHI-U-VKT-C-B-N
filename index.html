@@ -2,478 +2,395 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Mẫu 01 - Học liệu 3D Vẽ kỹ thuật</title>
-
-<script type="module"
-  src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js">
-</script>
+<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
 
 <style>
 *{box-sizing:border-box}
 :root{
-  --blue:#0b6aa9;
-  --blue-dark:#0d4f7d;
-  --light:#eaf4fb;
-  --line:#dbe4ea;
-  --text:#183042;
-  --muted:#607586;
-  --bg:#f3f6f9;
+  --blue:#0b6aa9; --blue2:#0d4f7d; --light:#eaf4fb; --line:#dbe4ea;
+  --text:#183042; --muted:#607586; --bg:#f3f6f9; --white:#fff;
 }
 body{
-  margin:0;
-  font-family:Arial,Helvetica,sans-serif;
-  background:var(--bg);
-  color:var(--text);
+  margin:0; font-family:Arial,Helvetica,sans-serif; background:var(--bg); color:var(--text);
 }
-.page{
-  width:min(1220px,96vw);
-  margin:18px auto 40px;
-}
+.page{width:min(1280px,96vw); margin:14px auto 30px}
 .hero{
-  background:linear-gradient(135deg,var(--blue-dark),var(--blue));
-  color:#fff;
-  border-radius:18px;
-  padding:18px 22px;
-  margin-bottom:16px;
+  background:linear-gradient(135deg,var(--blue2),var(--blue)); color:#fff;
+  border-radius:18px; padding:14px 18px; margin-bottom:12px;
 }
-.hero h1{
-  margin:0;
-  text-align:center;
-  font-size:clamp(24px,3vw,38px);
-  line-height:1.15;
-}
-.hero p{
-  text-align:center;
-  margin:7px 0 0;
-  font-size:15px;
-}
+.hero h1{margin:0;text-align:center;font-size:clamp(22px,2.7vw,36px);line-height:1.12}
+.hero p{margin:6px 0 0;text-align:center;font-size:14px}
 
-/* KHỐI CHÍNH: PC = 2 cột, điện thoại = xếp dọc */
-.viewer-layout{
+/* Nút chính luôn ở ngay trên khu vực quan sát */
+.tabs{
+  display:grid; grid-template-columns:repeat(5,1fr); gap:8px; margin-bottom:12px;
+}
+.tabs button{
+  border:0; border-radius:12px; min-height:46px; padding:10px 8px;
+  background:var(--blue); color:#fff; font-weight:700; cursor:pointer; font-size:14px;
+}
+.tabs button.active{background:var(--blue2)}
+.tabs button:hover{filter:brightness(.96)}
+
+.workspace{
   display:grid;
-  grid-template-columns:300px minmax(0,1fr);
-  gap:14px;
+  grid-template-columns:260px minmax(0,1fr) 300px;
+  gap:12px;
   align-items:stretch;
-  margin-bottom:16px;
+}
+.panel{
+  background:#fff; border:1px solid var(--line); border-radius:16px; overflow:hidden;
+  box-shadow:0 3px 14px rgba(0,0,0,.05);
+}
+.panel-title{
+  background:var(--light); text-align:center; padding:10px; font-weight:700; font-size:16px;
 }
 
-/* Hình tham chiếu không còn đè lên mô hình */
-.reference-box{
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:18px;
-  overflow:hidden;
-  box-shadow:0 4px 18px rgba(0,0,0,.06);
-}
-.reference-title{
-  background:var(--light);
-  text-align:center;
-  padding:13px 10px;
-  font-size:17px;
-  font-weight:700;
-  line-height:1.25;
-}
-.reference-box img{
-  display:block;
-  width:100%;
-  height:100%;
-  max-height:520px;
-  min-height:360px;
-  object-fit:contain;
-  background:#fff;
-  padding:14px;
+/* Cột tham chiếu PC */
+.reference img{
+  width:100%; height:100%; min-height:440px; max-height:620px; object-fit:contain; padding:10px;
 }
 
-.viewer-card{
-  position:relative;
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:18px;
-  overflow:hidden;
-  box-shadow:0 4px 18px rgba(0,0,0,.06);
-}
+/* Mô hình 3D */
+.model-wrap{position:relative}
 model-viewer{
-  width:100%;
-  height:min(64vh,620px);
-  min-height:430px;
+  width:100%; height:min(66vh,620px); min-height:460px;
   background:linear-gradient(#eef4f8,#fbfcfd);
 }
 .badge{
-  position:absolute;
-  right:16px;
-  top:16px;
-  z-index:5;
-  background:rgba(13,79,125,.92);
-  color:#fff;
-  padding:8px 12px;
-  border-radius:999px;
-  font-size:13px;
-  font-weight:700;
-  text-align:center;
+  position:absolute; right:12px; top:12px; z-index:3;
+  background:rgba(13,79,125,.92); color:#fff; border-radius:999px;
+  padding:8px 11px; font-size:12px; font-weight:700;
 }
 .hint{
-  text-align:center;
-  padding:11px 14px 14px;
-  color:var(--muted);
-  font-size:14px;
+  text-align:center; padding:9px 12px 11px; color:var(--muted); font-size:13px; background:#fff;
 }
 
-.toolbar{
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  gap:9px;
-  margin:16px 0;
+/* Cột hình chiếu PC */
+.projection-panel{
+  display:flex; flex-direction:column; min-height:100%;
 }
-button{
-  border:0;
-  border-radius:12px;
-  padding:12px 10px;
-  min-height:46px;
-  font-size:14px;
-  font-weight:700;
-  cursor:pointer;
-  transition:.18s ease;
+.projection-body{
+  flex:1; display:flex; align-items:center; justify-content:center; padding:12px; min-height:360px;
 }
-.toolbar button{
-  background:var(--blue);
-  color:#fff;
+.projection-body img{
+  max-width:100%; max-height:420px; object-fit:contain;
 }
-.toolbar button:hover,
-.toolbar button.active{
-  background:var(--blue-dark);
-  transform:translateY(-1px);
+.projection-empty{
+  text-align:center; color:var(--muted); padding:22px; line-height:1.4;
 }
-.secondary{
-  display:flex;
-  gap:9px;
-  justify-content:center;
-  flex-wrap:wrap;
-  margin-bottom:16px;
-}
-.secondary button{
-  background:#fff;
-  color:var(--blue-dark);
-  border:1px solid #aac7d9;
-  padding-inline:18px;
-}
-.info{
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:14px;
-  padding:12px 16px;
-  text-align:center;
-  color:#425b6d;
-  margin-bottom:14px;
-}
-.grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:14px;
-}
-.card{
-  display:none;
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:14px;
-  overflow:hidden;
-  box-shadow:0 3px 12px rgba(0,0,0,.04);
-  animation:appear .22s ease;
-}
-.card.show{display:block}
-.card h3{
-  margin:0;
-  padding:12px;
-  background:var(--light);
-  text-align:center;
-  font-size:18px;
-}
-.card img{
-  width:100%;
-  height:245px;
-  object-fit:contain;
-  padding:16px;
-}
-.note{
-  text-align:center;
-  color:#667a89;
-  font-size:12px;
-  margin-top:12px;
-}
-@keyframes appear{
-  from{opacity:0;transform:translateY(7px)}
-  to{opacity:1;transform:translateY(0)}
+.projection-note{
+  padding:10px 12px; background:#fbfcfd; border-top:1px solid var(--line);
+  text-align:center; color:var(--muted); font-size:12px;
 }
 
-/* Tablet */
-@media(max-width:980px){
-  .viewer-layout{
-    grid-template-columns:240px minmax(0,1fr);
-  }
-  .reference-box img{
-    min-height:330px;
-    padding:10px;
-  }
+/* Hàng phụ */
+.subtools{
+  display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-top:12px;
+}
+.subtools button{
+  border:1px solid #aac7d9; background:#fff; color:var(--blue2);
+  border-radius:10px; min-height:42px; padding:9px 14px; font-weight:700; cursor:pointer;
 }
 
-/* Điện thoại: cùng nội dung nhưng xếp dọc, không che nhau */
-@media(max-width:700px){
-  .page{
-    width:100%;
-    margin:0 auto 28px;
-    padding:10px;
-  }
-  .hero{
-    border-radius:14px;
-    padding:14px 12px;
-    margin-bottom:12px;
-  }
-  .hero h1{
-    font-size:22px;
-  }
-  .hero p{
-    font-size:14px;
-    line-height:1.35;
+/* Modal tham chiếu cho điện thoại */
+.modal{
+  display:none; position:fixed; inset:0; z-index:99; background:rgba(0,0,0,.45);
+  align-items:center; justify-content:center; padding:18px;
+}
+.modal.show{display:flex}
+.modal-card{
+  width:min(92vw,520px); max-height:86vh; background:#fff; border-radius:18px; overflow:auto;
+  box-shadow:0 12px 40px rgba(0,0,0,.25);
+}
+.modal-head{
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  background:var(--light); padding:12px 14px; font-weight:700;
+}
+.modal-head button{
+  border:0; background:var(--blue2); color:#fff; border-radius:999px; width:34px; height:34px; cursor:pointer;
+}
+.modal-card img{display:block;width:100%;height:auto;max-height:70vh;object-fit:contain;padding:12px}
+
+/* Mobile-first behavior:
+   - ẩn cột tham chiếu cố định để không che 3D
+   - ẩn cột hình chiếu bên phải
+   - khi chọn hình chiếu, hiển thị ngay trong "drawer" dưới mô hình, cùng một khối workspace
+*/
+.mobile-ref-btn{display:none}
+.mobile-projection{display:none}
+
+@media(max-width:900px){
+  .page{width:100%; margin:0 auto 24px; padding:8px}
+  .hero{border-radius:14px; padding:12px 10px; margin-bottom:10px}
+  .hero h1{font-size:22px}
+  .hero p{font-size:13px; line-height:1.35}
+
+  .tabs{grid-template-columns:1fr 1fr; gap:7px}
+  .tabs button{min-height:56px; font-size:14px}
+  .tabs button:last-child{grid-column:1/-1}
+
+  .workspace{display:block}
+  .reference{display:none}
+  .projection-panel{display:none}
+
+  .model-panel{border-radius:14px}
+  model-viewer{height:44vh; min-height:330px}
+  .badge{right:9px; top:9px; max-width:58%; text-align:center}
+  .hint{font-size:12.5px}
+
+  .mobile-ref-btn{
+    display:block; position:absolute; left:9px; top:9px; z-index:4;
+    border:0; background:rgba(255,255,255,.96); color:var(--blue2);
+    border-radius:999px; padding:8px 11px; font-size:12px; font-weight:700;
+    box-shadow:0 3px 10px rgba(0,0,0,.12); cursor:pointer;
   }
 
-  .viewer-layout{
-    grid-template-columns:1fr;
-    gap:10px;
+  .mobile-projection{
+    display:none;
+    border-top:1px solid var(--line);
+    background:#fff;
+  }
+  .mobile-projection.show{display:block}
+  .mobile-projection .mobile-title{
+    background:var(--light); text-align:center; padding:9px 10px; font-weight:700;
+  }
+  .mobile-projection .mobile-body{
+    height:28vh; min-height:210px; max-height:300px;
+    display:flex; align-items:center; justify-content:center; padding:8px 12px;
+  }
+  .mobile-projection img{
+    max-width:100%; max-height:100%; object-fit:contain;
+  }
+  .mobile-projection .mobile-note{
+    text-align:center; color:var(--muted); font-size:11.5px; padding:0 10px 9px;
   }
 
-  .reference-box{
-    border-radius:14px;
+  .subtools{
+    display:grid; grid-template-columns:1fr 1fr; gap:7px; margin-top:10px;
   }
-  .reference-title{
-    font-size:16px;
-    padding:10px;
-  }
-  .reference-box img{
-    width:100%;
-    height:auto;
-    min-height:0;
-    max-height:280px;
-    padding:10px;
-  }
-
-  .viewer-card{
-    border-radius:14px;
-  }
-  model-viewer{
-    height:52vh;
-    min-height:390px;
-  }
-  .badge{
-    right:10px;
-    top:10px;
-    font-size:12px;
-    max-width:55%;
-    padding:7px 10px;
-  }
-  .hint{
-    font-size:13px;
-    padding:9px 12px 12px;
-  }
-
-  .toolbar{
-    grid-template-columns:1fr 1fr;
-    gap:8px;
-  }
-  .toolbar button{
-    font-size:14px;
-    min-height:58px;
-    padding:10px 8px;
-  }
-  .toolbar button:last-child{
-    grid-column:1/-1;
-  }
-
-  .secondary{
-    display:grid;
-    grid-template-columns:1fr;
-  }
-  .secondary button{
-    width:100%;
-  }
-
-  .grid{
-    grid-template-columns:1fr;
-  }
-  .card img{
-    height:220px;
-  }
+  .subtools button{width:100%; min-height:48px}
+  .subtools button:last-child{grid-column:1/-1}
 }
 
-/* Điện thoại rất nhỏ */
-@media(max-width:420px){
+@media(max-width:430px){
   .hero h1{font-size:20px}
-  .reference-box img{max-height:240px}
-  model-viewer{min-height:350px;height:48vh}
-  .toolbar button{font-size:13px}
+  .hero p{font-size:12.5px}
+  model-viewer{height:42vh;min-height:315px}
+  .tabs button{font-size:13px}
+  .mobile-projection .mobile-body{height:26vh;min-height:195px}
 }
 </style>
 </head>
 
 <body>
 <div class="page">
-
-  <div class="hero">
+  <header class="hero">
     <h1>MẪU 01 – MÔ HÌNH 3D VÀ HÌNH CHIẾU VUÔNG GÓC</h1>
-    <p>Quan sát vật thể 3D → dự đoán hình chiếu → kiểm tra từng hình chiếu</p>
-  </div>
+    <p>Quan sát vật thể 3D → dự đoán hình chiếu → kiểm tra ngay trên cùng một màn hình</p>
+  </header>
 
-  <div class="viewer-layout">
+  <nav class="tabs">
+    <button id="btnFree" class="active" onclick="setMode('free')">1. Quan sát vật thể</button>
+    <button id="btnFront" onclick="setMode('front')">2. Hình chiếu đứng</button>
+    <button id="btnTop" onclick="setMode('top')">3. Hình chiếu bằng</button>
+    <button id="btnSide" onclick="setMode('side')">4. Hình chiếu cạnh</button>
+    <button id="btnAll" onclick="setMode('all')">5. Tổng hợp 3 hình chiếu</button>
+  </nav>
 
-    <div class="reference-box">
-      <div class="reference-title">Hình vẽ kích thước (tham chiếu)</div>
+  <section class="workspace">
+
+    <aside class="panel reference">
+      <div class="panel-title">Hình vẽ kích thước (tham chiếu)</div>
       <img src="hinh_tham_chieu.png" alt="Hình vẽ kích thước tham chiếu">
-    </div>
+    </aside>
 
-    <div class="viewer-card">
-      <model-viewer
-        id="mv"
-        src="mau01.glb"
-        camera-controls
-        touch-action="pan-y"
-        shadow-intensity="1"
-        exposure="1"
-        camera-orbit="35deg 70deg auto"
-        alt="Mô hình 3D chi tiết kỹ thuật">
-      </model-viewer>
+    <section class="panel model-panel">
+      <div class="model-wrap">
+        <model-viewer
+          id="mv"
+          src="mau01.glb"
+          camera-controls
+          touch-action="pan-y"
+          shadow-intensity="1"
+          exposure="1"
+          camera-orbit="35deg 70deg auto"
+          alt="Mô hình 3D chi tiết kỹ thuật">
+        </model-viewer>
 
-      <div id="badge" class="badge">Chế độ quan sát tự do</div>
-
-      <div class="hint">
-        Xoay bằng chuột/ngón tay • Cuộn hoặc chụm để phóng to, thu nhỏ
+        <button class="mobile-ref-btn" onclick="openReference()">Xem hình tham chiếu</button>
+        <div id="badge" class="badge">Chế độ quan sát tự do</div>
       </div>
-    </div>
 
-  </div>
+      <div class="hint">Xoay bằng chuột/ngón tay • Cuộn hoặc chụm để phóng to, thu nhỏ</div>
 
-  <div class="toolbar">
-    <button id="free" class="active" onclick="mode('free')">1. Quan sát vật thể</button>
-    <button id="front" onclick="mode('front')">2. Hình chiếu đứng</button>
-    <button id="top" onclick="mode('top')">3. Hình chiếu bằng</button>
-    <button id="side" onclick="mode('side')">4. Hình chiếu cạnh</button>
-    <button id="all" onclick="mode('all')">5. Tổng hợp 3 hình chiếu</button>
-  </div>
+      <!-- Trên điện thoại, hình chiếu xuất hiện ngay dưới mô hình 3D trong cùng khối -->
+      <div id="mobileProjection" class="mobile-projection">
+        <div id="mobileTitle" class="mobile-title">Hình chiếu</div>
+        <div class="mobile-body">
+          <img id="mobileImg" src="" alt="">
+        </div>
+        <div id="mobileNote" class="mobile-note"></div>
+      </div>
+    </section>
 
-  <div class="secondary">
-    <button onclick="spread()">Trải 3 hình chiếu</button>
+    <aside class="panel projection-panel">
+      <div id="projectionTitle" class="panel-title">Kết quả hình chiếu</div>
+      <div class="projection-body">
+        <div id="projectionEmpty" class="projection-empty">
+          Chọn <b>Hình chiếu đứng / bằng / cạnh</b> để đối chiếu trực tiếp với mô hình 3D.
+        </div>
+        <img id="projectionImg" src="" alt="" style="display:none">
+      </div>
+      <div id="projectionNote" class="projection-note">Mô hình 3D và hình chiếu luôn được hiển thị cạnh nhau.</div>
+    </aside>
+  </section>
+
+  <div class="subtools">
+    <button onclick="openReference()">Xem hình kích thước</button>
     <button onclick="resetView()">Về góc nhìn ban đầu</button>
-    <button onclick="hideAll()">Ẩn các hình chiếu</button>
+    <button onclick="setMode('free')">Ẩn hình chiếu</button>
   </div>
+</div>
 
-  <div id="info" class="info">
-    Hãy xoay vật thể và dự đoán hình chiếu trước khi bấm các nút kiểm tra.
-  </div>
-
-  <div class="grid">
-    <div id="frontCard" class="card">
-      <h3>Hình chiếu đứng</h3>
-      <img src="hinh_chieu_dung.png" alt="Hình chiếu đứng">
+<div id="refModal" class="modal" onclick="closeReference(event)">
+  <div class="modal-card">
+    <div class="modal-head">
+      <span>Hình vẽ kích thước (tham chiếu)</span>
+      <button onclick="closeReference()">×</button>
     </div>
-    <div id="topCard" class="card">
-      <h3>Hình chiếu bằng</h3>
-      <img src="hinh_chieu_bang.png" alt="Hình chiếu bằng">
-    </div>
-    <div id="sideCard" class="card">
-      <h3>Hình chiếu cạnh</h3>
-      <img src="hinh_chieu_canh.png" alt="Hình chiếu cạnh">
-    </div>
+    <img src="hinh_tham_chieu.png" alt="Hình vẽ kích thước tham chiếu">
   </div>
-
-  <div class="note">
-    Bản thử nghiệm: góc nhìn và ba hình chiếu có thể hiệu chỉnh lại theo chi tiết chính thức.
-  </div>
-
 </div>
 
 <script>
-const mv=document.getElementById('mv');
-const badge=document.getElementById('badge');
-const info=document.getElementById('info');
+const mv = document.getElementById('mv');
+const badge = document.getElementById('badge');
 
-const cards={
-  front:document.getElementById('frontCard'),
-  top:document.getElementById('topCard'),
-  side:document.getElementById('sideCard')
-};
-const btns={
-  free:document.getElementById('free'),
-  front:document.getElementById('front'),
-  top:document.getElementById('top'),
-  side:document.getElementById('side'),
-  all:document.getElementById('all')
+const pTitle = document.getElementById('projectionTitle');
+const pImg = document.getElementById('projectionImg');
+const pEmpty = document.getElementById('projectionEmpty');
+const pNote = document.getElementById('projectionNote');
+
+const mBox = document.getElementById('mobileProjection');
+const mTitle = document.getElementById('mobileTitle');
+const mImg = document.getElementById('mobileImg');
+const mNote = document.getElementById('mobileNote');
+
+const btns = {
+  free: document.getElementById('btnFree'),
+  front: document.getElementById('btnFront'),
+  top: document.getElementById('btnTop'),
+  side: document.getElementById('btnSide'),
+  all: document.getElementById('btnAll')
 };
 
-function active(name){
-  Object.values(btns).forEach(b=>b.classList.remove('active'));
+const views = {
+  front: {
+    title: 'Hình chiếu đứng',
+    img: 'hinh_chieu_dung.png',
+    orbit: '0deg 90deg auto',
+    note: 'Đối chiếu trực tiếp hướng nhìn đứng với mô hình 3D.'
+  },
+  top: {
+    title: 'Hình chiếu bằng',
+    img: 'hinh_chieu_bang.png',
+    orbit: '0deg 0deg auto',
+    note: 'Đối chiếu trực tiếp hướng nhìn từ trên xuống với mô hình 3D.'
+  },
+  side: {
+    title: 'Hình chiếu cạnh',
+    img: 'hinh_chieu_canh.png',
+    orbit: '90deg 90deg auto',
+    note: 'Đối chiếu trực tiếp hướng nhìn cạnh với mô hình 3D.'
+  }
+};
+
+function activeBtn(name){
+  Object.values(btns).forEach(b => b.classList.remove('active'));
   if(btns[name]) btns[name].classList.add('active');
 }
-function hideCards(){
-  Object.values(cards).forEach(c=>c.classList.remove('show'));
-}
-function showOnly(name){
-  hideCards();
-  cards[name].classList.add('show');
-}
-function showAll(){
-  Object.values(cards).forEach(c=>c.classList.add('show'));
-}
-function cam(v){
-  mv.cameraOrbit=v;
+
+function camera(orbit){
+  mv.cameraOrbit = orbit;
   if(mv.jumpCameraToGoal) mv.jumpCameraToGoal();
 }
-function mode(m){
-  active(m);
 
-  if(m==='free'){
-    hideCards();
-    cam('35deg 70deg auto');
+function showSingle(name){
+  const v = views[name];
+
+  pEmpty.style.display='none';
+  pImg.style.display='block';
+  pImg.src=v.img;
+  pImg.alt=v.title;
+  pTitle.textContent=v.title;
+  pNote.textContent=v.note;
+
+  mBox.classList.add('show');
+  mTitle.textContent=v.title;
+  mImg.src=v.img;
+  mImg.alt=v.title;
+  mNote.textContent=v.note;
+}
+
+function showAllSummary(){
+  // PC/mobile: dùng một ảnh đại diện trước; người học bấm từng tab để xem từng hình rõ hơn.
+  pEmpty.style.display='block';
+  pImg.style.display='none';
+  pTitle.textContent='Tổng hợp 3 hình chiếu';
+  pEmpty.innerHTML='<b>Hình chiếu đứng</b> • <b>Hình chiếu bằng</b> • <b>Hình chiếu cạnh</b><br>Hãy bấm từng nút để so sánh với mô hình ở đúng hướng nhìn.';
+  pNote.textContent='Chế độ tổng hợp giữ mô hình 3D ở góc nhìn đẳng trục.';
+
+  mBox.classList.add('show');
+  mTitle.textContent='Tổng hợp 3 hình chiếu';
+  mImg.src='hinh_chieu_dung.png';
+  mImg.alt='Tổng hợp ba hình chiếu';
+  mNote.textContent='Bấm lần lượt Đứng – Bằng – Cạnh để đối chiếu ngay với mô hình 3D.';
+}
+
+function setMode(mode){
+  activeBtn(mode);
+
+  if(mode==='free'){
+    camera('35deg 70deg auto');
     badge.textContent='Chế độ quan sát tự do';
-    info.textContent='Hãy xoay vật thể và dự đoán hình chiếu trước khi bấm các nút kiểm tra.';
+
+    pTitle.textContent='Kết quả hình chiếu';
+    pImg.style.display='none';
+    pEmpty.style.display='block';
+    pEmpty.innerHTML='Chọn <b>Hình chiếu đứng / bằng / cạnh</b> để đối chiếu trực tiếp với mô hình 3D.';
+    pNote.textContent='Mô hình 3D và hình chiếu luôn được hiển thị cạnh nhau.';
+    mBox.classList.remove('show');
+    return;
   }
-  if(m==='front'){
-    showOnly('front');
-    cam('0deg 90deg auto');
-    badge.textContent='Hướng nhìn minh họa: hình chiếu đứng';
-    info.textContent='Đối chiếu vật thể với hình chiếu đứng.';
-  }
-  if(m==='top'){
-    showOnly('top');
-    cam('0deg 0deg auto');
-    badge.textContent='Hướng nhìn minh họa: hình chiếu bằng';
-    info.textContent='Đối chiếu vật thể với hình chiếu bằng.';
-  }
-  if(m==='side'){
-    showOnly('side');
-    cam('90deg 90deg auto');
-    badge.textContent='Hướng nhìn minh họa: hình chiếu cạnh';
-    info.textContent='Đối chiếu vật thể với hình chiếu cạnh.';
-  }
-  if(m==='all'){
-    showAll();
-    cam('35deg 70deg auto');
+
+  if(mode==='all'){
+    camera('35deg 70deg auto');
     badge.textContent='Tổng hợp ba hình chiếu';
-    info.textContent='Đối chiếu đồng thời vật thể 3D với ba hình chiếu.';
+    showAllSummary();
+    return;
   }
+
+  camera(views[mode].orbit);
+  badge.textContent='Đang đối chiếu: ' + views[mode].title.toLowerCase();
+  showSingle(mode);
 }
-function spread(){
-  active('all');
-  showAll();
-  cam('35deg 70deg auto');
-  badge.textContent='Trải ba hình chiếu';
-  info.textContent='Ba hình chiếu được mở đồng thời để đối chiếu với vật thể 3D.';
-}
+
 function resetView(){
-  cam('35deg 70deg auto');
+  camera('35deg 70deg auto');
   badge.textContent='Góc nhìn ban đầu';
 }
-function hideAll(){
-  mode('free');
+
+function openReference(){
+  document.getElementById('refModal').classList.add('show');
+}
+function closeReference(e){
+  if(!e || e.target.id==='refModal' || e.target.tagName==='BUTTON'){
+    document.getElementById('refModal').classList.remove('show');
+  }
 }
 </script>
-
 </body>
 </html>
