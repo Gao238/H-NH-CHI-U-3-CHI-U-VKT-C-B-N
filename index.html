@@ -3,44 +3,257 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Mẫu 01 - Học liệu 3D</title>
-<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
+<title>Mẫu 01 - Học liệu 3D Vẽ kỹ thuật</title>
+
+<script type="module"
+  src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js">
+</script>
+
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f3f6f9;color:#183042}
-.page{width:min(1220px,96vw);margin:18px auto 40px}
-.hero{background:linear-gradient(135deg,#0d4f7d,#0b6aa9);color:#fff;border-radius:18px;padding:18px 22px;margin-bottom:16px}
-.hero h1{margin:0;text-align:center;font-size:clamp(24px,3vw,38px)}.hero p{text-align:center;margin:7px 0 0}
-.viewer{position:relative;background:#fff;border-radius:18px;overflow:hidden;border:1px solid #dbe4ea}
-model-viewer{width:100%;height:min(64vh,620px);min-height:430px;background:linear-gradient(#eef4f8,#fbfcfd)}
-.fixed{position:absolute;left:16px;top:16px;width:clamp(135px,19vw,220px);z-index:5;background:rgba(255,255,255,.96);border-radius:14px;padding:9px;box-shadow:0 5px 18px rgba(0,0,0,.15)}
-.fixed b{display:block;text-align:center;font-size:13px;margin-bottom:6px}.fixed img{width:100%;aspect-ratio:4/3;object-fit:contain;background:#f2f4f6;border-radius:9px}
-.badge{position:absolute;right:16px;top:16px;background:rgba(13,79,125,.92);color:#fff;padding:8px 12px;border-radius:999px;font-size:13px;font-weight:700;z-index:5}
-.hint{text-align:center;padding:11px 14px 14px;color:#607586;font-size:14px}
-.toolbar{display:grid;grid-template-columns:repeat(5,1fr);gap:9px;margin:16px 0}
-button{border:0;border-radius:12px;padding:12px 10px;min-height:46px;font-size:14px;font-weight:700;cursor:pointer}
-.toolbar button{background:#0b6aa9;color:white}.toolbar button.active{background:#0d4f7d}
-.secondary{display:flex;gap:9px;justify-content:center;flex-wrap:wrap;margin-bottom:16px}
-.secondary button{background:#fff;color:#0d4f7d;border:1px solid #aac7d9;padding-inline:18px}
-.info{background:#fff;border:1px solid #dbe4ea;border-radius:14px;padding:12px 16px;text-align:center;color:#425b6d;margin-bottom:14px}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.card{display:none;background:#fff;border:1px solid #dbe4ea;border-radius:14px;overflow:hidden}.card.show{display:block}
-.card h3{margin:0;padding:12px;background:#eaf4fb;text-align:center}.card img{width:100%;height:245px;object-fit:contain;padding:16px}
-.note{text-align:center;color:#667a89;font-size:12px;margin-top:12px}
-@media(max-width:850px){.toolbar{grid-template-columns:repeat(2,1fr)}.toolbar button:last-child{grid-column:1/-1}.grid{grid-template-columns:1fr}.fixed{left:9px;top:9px;width:145px}.badge{right:9px;top:9px;font-size:12px}model-viewer{height:56vh;min-height:410px}}
+*{box-sizing:border-box}
+:root{
+  --blue:#0b6aa9;
+  --blue-dark:#0d4f7d;
+  --light:#eaf4fb;
+  --line:#dbe4ea;
+  --text:#183042;
+  --muted:#607586;
+  --bg:#f3f6f9;
+}
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+.page{
+  width:min(1220px,96vw);
+  margin:18px auto 40px;
+}
+.hero{
+  background:linear-gradient(135deg,var(--blue-dark),var(--blue));
+  color:white;
+  border-radius:18px;
+  padding:18px 22px;
+  margin-bottom:16px;
+}
+.hero h1{
+  margin:0;
+  text-align:center;
+  font-size:clamp(24px,3vw,38px);
+}
+.hero p{
+  text-align:center;
+  margin:7px 0 0;
+  font-size:15px;
+}
+
+.viewer{
+  position:relative;
+  background:white;
+  border-radius:18px;
+  overflow:hidden;
+  border:1px solid var(--line);
+  box-shadow:0 4px 18px rgba(0,0,0,.06);
+}
+
+model-viewer{
+  width:100%;
+  height:min(64vh,620px);
+  min-height:430px;
+  background:linear-gradient(#eef4f8,#fbfcfd);
+}
+
+/* Ô hình tham chiếu */
+.reference-box{
+  position:absolute;
+  left:16px;
+  top:16px;
+  width:clamp(180px,23vw,300px);
+  z-index:5;
+  background:rgba(255,255,255,.97);
+  border:1px solid var(--line);
+  border-radius:16px;
+  overflow:hidden;
+  box-shadow:0 5px 18px rgba(0,0,0,.15);
+}
+.reference-title{
+  background:var(--light);
+  text-align:center;
+  padding:10px 8px;
+  font-size:15px;
+  font-weight:700;
+}
+.reference-box img{
+  display:block;
+  width:100%;
+  height:220px;
+  object-fit:contain;
+  background:white;
+  padding:8px;
+}
+
+.badge{
+  position:absolute;
+  right:16px;
+  top:16px;
+  z-index:5;
+  background:rgba(13,79,125,.92);
+  color:white;
+  padding:8px 12px;
+  border-radius:999px;
+  font-size:13px;
+  font-weight:700;
+}
+.hint{
+  text-align:center;
+  padding:11px 14px 14px;
+  color:var(--muted);
+  font-size:14px;
+}
+
+.toolbar{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:9px;
+  margin:16px 0;
+}
+button{
+  border:0;
+  border-radius:12px;
+  padding:12px 10px;
+  min-height:46px;
+  font-size:14px;
+  font-weight:700;
+  cursor:pointer;
+  transition:.18s ease;
+}
+.toolbar button{
+  background:var(--blue);
+  color:white;
+}
+.toolbar button:hover,
+.toolbar button.active{
+  background:var(--blue-dark);
+  transform:translateY(-1px);
+}
+.secondary{
+  display:flex;
+  gap:9px;
+  justify-content:center;
+  flex-wrap:wrap;
+  margin-bottom:16px;
+}
+.secondary button{
+  background:white;
+  color:var(--blue-dark);
+  border:1px solid #aac7d9;
+  padding-inline:18px;
+}
+.info{
+  background:white;
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:12px 16px;
+  text-align:center;
+  color:#425b6d;
+  margin-bottom:14px;
+}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+}
+.card{
+  display:none;
+  background:white;
+  border:1px solid var(--line);
+  border-radius:14px;
+  overflow:hidden;
+  box-shadow:0 3px 12px rgba(0,0,0,.04);
+  animation:appear .22s ease;
+}
+.card.show{display:block}
+.card h3{
+  margin:0;
+  padding:12px;
+  background:var(--light);
+  text-align:center;
+  font-size:18px;
+}
+.card img{
+  width:100%;
+  height:245px;
+  object-fit:contain;
+  padding:16px;
+  background:white;
+}
+.note{
+  text-align:center;
+  color:#667a89;
+  font-size:12px;
+  margin-top:12px;
+}
+@keyframes appear{
+  from{opacity:0;transform:translateY(7px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+@media(max-width:850px){
+  .toolbar{grid-template-columns:repeat(2,1fr)}
+  .toolbar button:last-child{grid-column:1/-1}
+  .grid{grid-template-columns:1fr}
+  .reference-box{
+    left:9px;
+    top:9px;
+    width:170px;
+  }
+  .reference-box img{height:145px}
+  .badge{
+    right:9px;
+    top:9px;
+    font-size:12px;
+    max-width:48%;
+    text-align:center;
+  }
+  model-viewer{
+    height:56vh;
+    min-height:410px;
+  }
+}
 </style>
 </head>
+
 <body>
 <div class="page">
+
   <div class="hero">
     <h1>MẪU 01 – MÔ HÌNH 3D VÀ HÌNH CHIẾU VUÔNG GÓC</h1>
     <p>Quan sát vật thể 3D → dự đoán hình chiếu → kiểm tra từng hình chiếu</p>
   </div>
 
   <div class="viewer">
-    <model-viewer id="mv" src="mau01.glb" camera-controls touch-action="pan-y" shadow-intensity="1" exposure="1" camera-orbit="35deg 70deg auto"></model-viewer>
-    <div class="fixed"><b>Hình định hướng cố định</b><img src="hinh_chieu_canh.png"></div>
+    <model-viewer
+      id="mv"
+      src="mau01.glb"
+      camera-controls
+      touch-action="pan-y"
+      shadow-intensity="1"
+      exposure="1"
+      camera-orbit="35deg 70deg auto"
+      alt="Mô hình 3D chi tiết kỹ thuật">
+    </model-viewer>
+
+    <div class="reference-box">
+      <div class="reference-title">Hình vẽ kích thước (tham chiếu)</div>
+      <img src="hinh_tham_chieu.png" alt="Hình vẽ kích thước tham chiếu">
+    </div>
+
     <div id="badge" class="badge">Chế độ quan sát tự do</div>
-    <div class="hint">Xoay bằng chuột/ngón tay • Cuộn hoặc chụm để phóng to, thu nhỏ</div>
+
+    <div class="hint">
+      Xoay bằng chuột/ngón tay • Cuộn hoặc chụm để phóng to, thu nhỏ
+    </div>
   </div>
 
   <div class="toolbar">
@@ -57,41 +270,131 @@ button{border:0;border-radius:12px;padding:12px 10px;min-height:46px;font-size:1
     <button onclick="hideAll()">Ẩn các hình chiếu</button>
   </div>
 
-  <div id="info" class="info">Hãy xoay vật thể và dự đoán hình chiếu trước khi bấm các nút kiểm tra.</div>
-
-  <div class="grid">
-    <div id="frontCard" class="card"><h3>Hình chiếu đứng</h3><img src="hinh_chieu_dung.png"></div>
-    <div id="topCard" class="card"><h3>Hình chiếu bằng</h3><img src="hinh_chieu_bang.png"></div>
-    <div id="sideCard" class="card"><h3>Hình chiếu cạnh</h3><img src="hinh_chieu_canh.png"></div>
+  <div id="info" class="info">
+    Hãy xoay vật thể và dự đoán hình chiếu trước khi bấm các nút kiểm tra.
   </div>
 
-  <div class="note">Bản V3 thử nghiệm: góc nhìn và ba hình chiếu sẽ hiệu chỉnh lại theo chi tiết chính thức.</div>
+  <div class="grid">
+    <div id="frontCard" class="card">
+      <h3>Hình chiếu đứng</h3>
+      <img src="hinh_chieu_dung.png" alt="Hình chiếu đứng">
+    </div>
+
+    <div id="topCard" class="card">
+      <h3>Hình chiếu bằng</h3>
+      <img src="hinh_chieu_bang.png" alt="Hình chiếu bằng">
+    </div>
+
+    <div id="sideCard" class="card">
+      <h3>Hình chiếu cạnh</h3>
+      <img src="hinh_chieu_canh.png" alt="Hình chiếu cạnh">
+    </div>
+  </div>
+
+  <div class="note">
+    Bản thử nghiệm: góc nhìn và ba hình chiếu có thể hiệu chỉnh lại theo chi tiết chính thức.
+  </div>
+
 </div>
 
 <script>
 const mv=document.getElementById('mv');
 const badge=document.getElementById('badge');
 const info=document.getElementById('info');
-const cards={front:document.getElementById('frontCard'),top:document.getElementById('topCard'),side:document.getElementById('sideCard')};
-const btns={free:document.getElementById('free'),front:document.getElementById('front'),top:document.getElementById('top'),side:document.getElementById('side'),all:document.getElementById('all')};
 
-function active(name){Object.values(btns).forEach(b=>b.classList.remove('active'));if(btns[name])btns[name].classList.add('active')}
-function hideCards(){Object.values(cards).forEach(c=>c.classList.remove('show'))}
-function showOnly(name){hideCards();cards[name].classList.add('show')}
-function showAll(){Object.values(cards).forEach(c=>c.classList.add('show'))}
-function cam(v){mv.cameraOrbit=v;if(mv.jumpCameraToGoal)mv.jumpCameraToGoal()}
+const cards={
+  front:document.getElementById('frontCard'),
+  top:document.getElementById('topCard'),
+  side:document.getElementById('sideCard')
+};
+
+const btns={
+  free:document.getElementById('free'),
+  front:document.getElementById('front'),
+  top:document.getElementById('top'),
+  side:document.getElementById('side'),
+  all:document.getElementById('all')
+};
+
+function active(name){
+  Object.values(btns).forEach(b=>b.classList.remove('active'));
+  if(btns[name]) btns[name].classList.add('active');
+}
+
+function hideCards(){
+  Object.values(cards).forEach(c=>c.classList.remove('show'));
+}
+
+function showOnly(name){
+  hideCards();
+  cards[name].classList.add('show');
+}
+
+function showAll(){
+  Object.values(cards).forEach(c=>c.classList.add('show'));
+}
+
+function cam(v){
+  mv.cameraOrbit=v;
+  if(mv.jumpCameraToGoal) mv.jumpCameraToGoal();
+}
 
 function mode(m){
   active(m);
-  if(m==='free'){hideCards();cam('35deg 70deg auto');badge.textContent='Chế độ quan sát tự do';info.textContent='Hãy xoay vật thể và dự đoán hình chiếu trước khi bấm các nút kiểm tra.'}
-  if(m==='front'){showOnly('front');cam('0deg 90deg auto');badge.textContent='Hướng nhìn minh họa: hình chiếu đứng';info.textContent='Đối chiếu vật thể với hình chiếu đứng.'}
-  if(m==='top'){showOnly('top');cam('0deg 0deg auto');badge.textContent='Hướng nhìn minh họa: hình chiếu bằng';info.textContent='Đối chiếu vật thể với hình chiếu bằng.'}
-  if(m==='side'){showOnly('side');cam('90deg 90deg auto');badge.textContent='Hướng nhìn minh họa: hình chiếu cạnh';info.textContent='Đối chiếu vật thể với hình chiếu cạnh.'}
-  if(m==='all'){showAll();cam('35deg 70deg auto');badge.textContent='Tổng hợp ba hình chiếu';info.textContent='Đối chiếu đồng thời vật thể 3D với ba hình chiếu.'}
+
+  if(m==='free'){
+    hideCards();
+    cam('35deg 70deg auto');
+    badge.textContent='Chế độ quan sát tự do';
+    info.textContent='Hãy xoay vật thể và dự đoán hình chiếu trước khi bấm các nút kiểm tra.';
+  }
+
+  if(m==='front'){
+    showOnly('front');
+    cam('0deg 90deg auto');
+    badge.textContent='Hướng nhìn minh họa: hình chiếu đứng';
+    info.textContent='Đối chiếu vật thể với hình chiếu đứng.';
+  }
+
+  if(m==='top'){
+    showOnly('top');
+    cam('0deg 0deg auto');
+    badge.textContent='Hướng nhìn minh họa: hình chiếu bằng';
+    info.textContent='Đối chiếu vật thể với hình chiếu bằng.';
+  }
+
+  if(m==='side'){
+    showOnly('side');
+    cam('90deg 90deg auto');
+    badge.textContent='Hướng nhìn minh họa: hình chiếu cạnh';
+    info.textContent='Đối chiếu vật thể với hình chiếu cạnh.';
+  }
+
+  if(m==='all'){
+    showAll();
+    cam('35deg 70deg auto');
+    badge.textContent='Tổng hợp ba hình chiếu';
+    info.textContent='Đối chiếu đồng thời vật thể 3D với ba hình chiếu.';
+  }
 }
-function spread(){active('all');showAll();cam('35deg 70deg auto');badge.textContent='Trải ba hình chiếu';info.textContent='Ba hình chiếu được mở đồng thời để mô phỏng bước chuyển từ 3D sang 2D.'}
-function resetView(){cam('35deg 70deg auto');badge.textContent='Góc nhìn ban đầu'}
-function hideAll(){mode('free')}
+
+function spread(){
+  active('all');
+  showAll();
+  cam('35deg 70deg auto');
+  badge.textContent='Trải ba hình chiếu';
+  info.textContent='Ba hình chiếu được mở đồng thời để đối chiếu với vật thể 3D.';
+}
+
+function resetView(){
+  cam('35deg 70deg auto');
+  badge.textContent='Góc nhìn ban đầu';
+}
+
+function hideAll(){
+  mode('free');
+}
 </script>
+
 </body>
 </html>
