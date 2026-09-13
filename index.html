@@ -32,7 +32,7 @@ body{
   margin:8px auto 18px;
 }
 
-/* ===== HEADER GỌN HƠN ĐỂ PC VỪA 1 MÀN HÌNH ===== */
+/* HEADER GỌN */
 .hero{
   background:linear-gradient(135deg,var(--blue2),var(--blue));
   color:#fff;
@@ -71,10 +71,9 @@ body{
 }
 .tabs button.active{background:var(--blue2)}
 
-/* ===== PC: 3 CỘT CÙNG 1 MÀN HÌNH ===== */
 .workspace{
   display:grid;
-  grid-template-columns:220px minmax(0,1fr) 300px;
+  grid-template-columns:220px minmax(0,1fr) 330px;
   gap:8px;
   height:calc(100vh - 170px);
   min-height:480px;
@@ -95,7 +94,7 @@ body{
   font-size:14px;
 }
 
-/* Tham chiếu PC */
+/* THAM CHIẾU */
 .reference{
   display:flex;
   flex-direction:column;
@@ -108,7 +107,7 @@ body{
   padding:7px;
 }
 
-/* 3D PC */
+/* 3D */
 .model-panel{
   display:flex;
   flex-direction:column;
@@ -145,7 +144,7 @@ model-viewer{
   border-top:1px solid #edf1f4;
 }
 
-/* Hình chiếu PC */
+/* HÌNH CHIẾU PC */
 .projection-panel{
   display:flex;
   flex-direction:column;
@@ -179,7 +178,69 @@ model-viewer{
   background:#fbfcfd;
 }
 
-/* Công cụ phụ PC */
+/* TỔNG HỢP 3 HÌNH CHIẾU - BỐ TRÍ ĐÚNG YÊU CẦU
+   Đứng: trên trái
+   Bằng: dưới hình đứng
+   Cạnh: bên phải hình đứng
+*/
+.all-layout{
+  display:none;
+  width:100%;
+  height:100%;
+  grid-template-columns:1fr 1fr;
+  grid-template-rows:1fr 1fr;
+  gap:7px;
+  padding:4px;
+}
+.all-layout.show{display:grid}
+.all-view{
+  border:1px solid #dfe8ee;
+  border-radius:8px;
+  background:#fff;
+  display:flex;
+  flex-direction:column;
+  min-width:0;
+  min-height:0;
+  overflow:hidden;
+}
+.all-view .all-label{
+  background:#f1f7fb;
+  text-align:center;
+  font-size:11px;
+  font-weight:700;
+  padding:5px 4px;
+}
+.all-view .all-img{
+  flex:1;
+  min-height:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:4px;
+}
+.all-view img{
+  max-width:100%;
+  max-height:100%;
+  object-fit:contain;
+}
+.all-front{grid-column:1;grid-row:1}
+.all-top{grid-column:1;grid-row:2}
+.all-side{grid-column:2;grid-row:1}
+.all-blank{
+  grid-column:2;
+  grid-row:2;
+  border:1px dashed #d9e4eb;
+  border-radius:8px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#95a4af;
+  font-size:11px;
+  text-align:center;
+  padding:8px;
+}
+
+/* PHỤ */
 .subtools{
   display:flex;
   gap:6px;
@@ -199,8 +260,9 @@ model-viewer{
   cursor:pointer;
 }
 
-/* ===== MOBILE ===== */
+/* MOBILE */
 .mobile-compare{display:none}
+.mobile-all{display:none}
 .mobile-ref-btn{display:none}
 
 @media(max-width:900px){
@@ -235,7 +297,6 @@ model-viewer{
     grid-column:1/-1;
   }
 
-  /* Mobile chỉ giữ mô hình 3D làm vùng lớn */
   .workspace{
     display:block;
     height:auto;
@@ -251,13 +312,12 @@ model-viewer{
     border-radius:12px;
   }
   .model-wrap{
-    height:37vh;
-    min-height:290px;
+    height:35vh;
+    min-height:275px;
   }
   model-viewer{
     height:100%;
   }
-
   .mobile-ref-btn{
     display:block;
     position:absolute;
@@ -285,16 +345,14 @@ model-viewer{
     padding:6px 8px;
   }
 
-  /* Khi chọn hình chiếu: tham chiếu + hình chiếu hiện CÙNG NHAU ngay dưới 3D */
+  /* Mobile: tham chiếu + 1 hình chiếu */
   .mobile-compare{
     display:none;
     grid-template-columns:1fr 1fr;
     gap:6px;
     margin-top:7px;
   }
-  .mobile-compare.show{
-    display:grid;
-  }
+  .mobile-compare.show{display:grid}
   .mobile-card{
     background:#fff;
     border:1px solid var(--line);
@@ -310,8 +368,8 @@ model-viewer{
     line-height:1.2;
   }
   .mobile-card-body{
-    height:24vh;
-    min-height:175px;
+    height:22vh;
+    min-height:165px;
     display:flex;
     align-items:center;
     justify-content:center;
@@ -333,6 +391,77 @@ model-viewer{
     font-size:11px;
   }
 
+  /* Mobile: tổng hợp 3 hình chiếu theo đúng bố trí */
+  .mobile-all{
+    display:none;
+    margin-top:7px;
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:11px;
+    overflow:hidden;
+  }
+  .mobile-all.show{display:block}
+  .mobile-all-title{
+    background:var(--light);
+    text-align:center;
+    padding:8px;
+    font-size:13px;
+    font-weight:700;
+  }
+  .mobile-all-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    grid-template-rows:1fr 1fr;
+    gap:6px;
+    padding:7px;
+    height:48vh;
+    min-height:360px;
+  }
+  .mobile-all-view{
+    border:1px solid #dfe8ee;
+    border-radius:8px;
+    display:flex;
+    flex-direction:column;
+    overflow:hidden;
+    min-height:0;
+  }
+  .mobile-all-view b{
+    display:block;
+    text-align:center;
+    background:#f1f7fb;
+    padding:5px;
+    font-size:11px;
+  }
+  .mobile-all-view div{
+    flex:1;
+    min-height:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:4px;
+  }
+  .mobile-all-view img{
+    max-width:100%;
+    max-height:100%;
+    object-fit:contain;
+  }
+  .mobile-all-front{grid-column:1;grid-row:1}
+  .mobile-all-top{grid-column:1;grid-row:2}
+  .mobile-all-side{grid-column:2;grid-row:1}
+  .mobile-all-blank{
+    grid-column:2;
+    grid-row:2;
+    border:1px dashed #d9e4eb;
+    border-radius:8px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#95a4af;
+    text-align:center;
+    font-size:10px;
+    padding:6px;
+  }
+
   .subtools{
     display:grid;
     grid-template-columns:1fr 1fr;
@@ -347,14 +476,6 @@ model-viewer{
   .subtools button:last-child{
     grid-column:1/-1;
   }
-}
-
-@media(max-width:430px){
-  .hero h1{font-size:19px}
-  .hero p{font-size:12px}
-  .model-wrap{height:35vh;min-height:275px}
-  .mobile-card-body{height:22vh;min-height:165px}
-  .tabs button{font-size:12.5px}
 }
 </style>
 </head>
@@ -377,13 +498,13 @@ model-viewer{
 
   <section class="workspace">
 
-    <!-- PC: hình tham chiếu bên trái -->
+    <!-- PC: tham chiếu -->
     <aside class="panel reference">
       <div class="panel-title">Hình vẽ kích thước (tham chiếu)</div>
       <img src="hinh_tham_chieu.png" alt="Hình vẽ kích thước tham chiếu">
     </aside>
 
-    <!-- Giữa: mô hình 3D -->
+    <!-- 3D -->
     <section class="panel model-panel">
       <div class="model-wrap">
         <model-viewer
@@ -400,19 +521,42 @@ model-viewer{
         <button class="mobile-ref-btn" onclick="openReference()">Xem tham chiếu</button>
         <div id="badge" class="badge">Quan sát tự do</div>
       </div>
-
       <div class="hint">Xoay bằng chuột/ngón tay • Cuộn/chụm để phóng to, thu nhỏ</div>
     </section>
 
-    <!-- PC: hình chiếu bên phải -->
+    <!-- PC: hình chiếu -->
     <aside class="panel projection-panel">
       <div id="projectionTitle" class="panel-title">Kết quả hình chiếu</div>
+
       <div class="projection-body">
         <div id="projectionEmpty" class="projection-empty">
           Chọn <b>Hình chiếu đứng / bằng / cạnh</b> để đối chiếu ngay với mô hình 3D.
         </div>
+
         <img id="projectionImg" src="" alt="" style="display:none">
+
+        <div id="allLayout" class="all-layout">
+          <div class="all-view all-front">
+            <div class="all-label">Hình chiếu đứng</div>
+            <div class="all-img"><img src="hinh_chieu_dung.png" alt="Hình chiếu đứng"></div>
+          </div>
+
+          <div class="all-view all-top">
+            <div class="all-label">Hình chiếu bằng</div>
+            <div class="all-img"><img src="hinh_chieu_bang.png" alt="Hình chiếu bằng"></div>
+          </div>
+
+          <div class="all-view all-side">
+            <div class="all-label">Hình chiếu cạnh</div>
+            <div class="all-img"><img src="hinh_chieu_canh.png" alt="Hình chiếu cạnh"></div>
+          </div>
+
+          <div class="all-blank">
+            Bố trí theo quan hệ giữa các hình chiếu
+          </div>
+        </div>
       </div>
+
       <div id="projectionNote" class="projection-note">
         Hình chiếu được hiển thị song song với mô hình 3D.
       </div>
@@ -420,7 +564,7 @@ model-viewer{
 
   </section>
 
-  <!-- MOBILE: tham chiếu và hình chiếu hiện cùng lúc ngay dưới 3D -->
+  <!-- MOBILE: tham chiếu + 1 hình chiếu -->
   <section id="mobileCompare" class="mobile-compare">
     <div class="mobile-card">
       <div class="mobile-card-title">Hình tham chiếu</div>
@@ -441,6 +585,32 @@ model-viewer{
     </div>
   </section>
 
+  <!-- MOBILE: tổng hợp 3 hình chiếu -->
+  <section id="mobileAll" class="mobile-all">
+    <div class="mobile-all-title">Tổng hợp 3 hình chiếu</div>
+
+    <div class="mobile-all-grid">
+      <div class="mobile-all-view mobile-all-front">
+        <b>Hình chiếu đứng</b>
+        <div><img src="hinh_chieu_dung.png" alt="Hình chiếu đứng"></div>
+      </div>
+
+      <div class="mobile-all-view mobile-all-top">
+        <b>Hình chiếu bằng</b>
+        <div><img src="hinh_chieu_bang.png" alt="Hình chiếu bằng"></div>
+      </div>
+
+      <div class="mobile-all-view mobile-all-side">
+        <b>Hình chiếu cạnh</b>
+        <div><img src="hinh_chieu_canh.png" alt="Hình chiếu cạnh"></div>
+      </div>
+
+      <div class="mobile-all-blank">
+        Đứng ở trên trái<br>Bằng ở dưới<br>Cạnh ở bên phải
+      </div>
+    </div>
+  </section>
+
   <div class="subtools">
     <button onclick="openReference()">Xem lớn hình tham chiếu</button>
     <button onclick="resetView()">Về góc nhìn ban đầu</button>
@@ -449,7 +619,7 @@ model-viewer{
 
 </div>
 
-<!-- Modal hình tham chiếu -->
+<!-- Modal tham chiếu -->
 <div id="refModal" style="display:none;position:fixed;inset:0;z-index:99;background:rgba(0,0,0,.45);padding:16px;align-items:center;justify-content:center">
   <div style="width:min(92vw,520px);max-height:88vh;background:#fff;border-radius:16px;overflow:auto">
     <div style="display:flex;justify-content:space-between;align-items:center;background:#eaf4fb;padding:10px 12px;font-weight:700">
@@ -468,8 +638,10 @@ const pTitle = document.getElementById('projectionTitle');
 const pImg = document.getElementById('projectionImg');
 const pEmpty = document.getElementById('projectionEmpty');
 const pNote = document.getElementById('projectionNote');
+const allLayout = document.getElementById('allLayout');
 
 const mobileCompare = document.getElementById('mobileCompare');
+const mobileAll = document.getElementById('mobileAll');
 const mobileProjectionTitle = document.getElementById('mobileProjectionTitle');
 const mobileProjectionImg = document.getElementById('mobileProjectionImg');
 const mobileNote = document.getElementById('mobileNote');
@@ -507,15 +679,23 @@ function activeBtn(name){
   Object.values(btns).forEach(b=>b.classList.remove('active'));
   if(btns[name]) btns[name].classList.add('active');
 }
+
 function camera(orbit){
   mv.cameraOrbit=orbit;
   if(mv.jumpCameraToGoal) mv.jumpCameraToGoal();
 }
+
+function clearPCProjection(){
+  pImg.style.display='none';
+  pEmpty.style.display='none';
+  allLayout.classList.remove('show');
+}
+
 function showProjection(name){
   const v=views[name];
 
   // PC
-  pEmpty.style.display='none';
+  clearPCProjection();
   pImg.style.display='block';
   pImg.src=v.img;
   pImg.alt=v.title;
@@ -523,6 +703,7 @@ function showProjection(name){
   pNote.textContent=v.note;
 
   // Mobile
+  mobileAll.classList.remove('show');
   mobileCompare.classList.add('show');
   mobileProjectionTitle.textContent=v.title;
   mobileProjectionImg.src=v.img;
@@ -537,13 +718,14 @@ function setMode(mode){
     camera('35deg 70deg auto');
     badge.textContent='Quan sát tự do';
 
-    pTitle.textContent='Kết quả hình chiếu';
-    pImg.style.display='none';
+    clearPCProjection();
     pEmpty.style.display='block';
+    pTitle.textContent='Kết quả hình chiếu';
     pEmpty.innerHTML='Chọn <b>Hình chiếu đứng / bằng / cạnh</b> để đối chiếu ngay với mô hình 3D.';
     pNote.textContent='Hình chiếu được hiển thị song song với mô hình 3D.';
 
     mobileCompare.classList.remove('show');
+    mobileAll.classList.remove('show');
     return;
   }
 
@@ -551,17 +733,15 @@ function setMode(mode){
     camera('35deg 70deg auto');
     badge.textContent='Tổng hợp 3 hình chiếu';
 
+    // PC: hiện đủ 3 hình theo bố trí chuẩn
+    clearPCProjection();
+    allLayout.classList.add('show');
     pTitle.textContent='Tổng hợp 3 hình chiếu';
-    pImg.style.display='none';
-    pEmpty.style.display='block';
-    pEmpty.innerHTML='Bấm lần lượt <b>Đứng – Bằng – Cạnh</b> để xem từng hình ở đúng hướng nhìn.';
-    pNote.textContent='Giữ mô hình ở góc nhìn đẳng trục để tổng hợp.';
+    pNote.textContent='Đứng: trên trái • Bằng: phía dưới • Cạnh: bên phải hình chiếu đứng';
 
-    mobileCompare.classList.add('show');
-    mobileProjectionTitle.textContent='Tổng hợp';
-    mobileProjectionImg.src='hinh_chieu_dung.png';
-    mobileProjectionImg.alt='Tổng hợp hình chiếu';
-    mobileNote.textContent='Bấm lần lượt Đứng – Bằng – Cạnh để so sánh với hình tham chiếu và mô hình 3D.';
+    // Mobile: hiện đủ 3 hình theo cùng bố trí
+    mobileCompare.classList.remove('show');
+    mobileAll.classList.add('show');
     return;
   }
 
@@ -576,9 +756,9 @@ function resetView(){
 }
 
 function openReference(){
-  const m=document.getElementById('refModal');
-  m.style.display='flex';
+  document.getElementById('refModal').style.display='flex';
 }
+
 function closeReference(){
   document.getElementById('refModal').style.display='none';
 }
